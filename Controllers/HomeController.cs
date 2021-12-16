@@ -176,24 +176,28 @@ namespace wed_plan.Controllers
         [HttpPost("update/{weddingid}")]
         public IActionResult Update(int weddingid, Wedding WeddingUpdate)
         {
+            Wedding weddingtoUpdate = _context.Weddings.FirstOrDefault(d => d.WeddingId == weddingid);
             if (ModelState.IsValid)
             {
                 if (HttpContext.Session.GetInt32("LoggedIn") == null)
                 {
                     return RedirectToAction("Index");
                 }
-                Wedding weddingtoUpdate = _context.Weddings.FirstOrDefault(d => d.WeddingId == weddingid);
+                
                 if (HttpContext.Session.GetInt32("LoggedIn") != weddingtoUpdate.UserId)
                 {
                     return RedirectToAction("Logout");
                 }
+
                 weddingtoUpdate.person1 = WeddingUpdate.person1;
                 weddingtoUpdate.person2 = WeddingUpdate.person2;
                 weddingtoUpdate.dateofWedding = WeddingUpdate.dateofWedding;
                 weddingtoUpdate.Address = weddingtoUpdate.Address;
                 _context.SaveChanges();
                 return RedirectToAction("Dashboard");
-            } else {
+            }
+            else
+            {
                 return View("Edit");
             }
 
