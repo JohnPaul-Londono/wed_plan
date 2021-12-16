@@ -1,0 +1,40 @@
+@model Wedding
+@using Microsoft.AspNetCore.Http
+<div>
+    <a href="/dashboard" class="btn btn-info">Dashboard</a>
+</div>
+<h1>@Model.person1 and @Model.person2's Wedding</h1>
+<h1>@Model.UserId</h1>
+
+<h3>Date: @Model.dateofWedding.ToString("MMMM dd, yyyy")</h3>
+
+
+@{
+    foreach (RSVP we in Model.guestlist)
+    {
+        <ul>
+            <li>@we.User.firstName</li>
+        </ul>
+    }
+
+}
+@{
+    if (Model.UserId == Context.Session.GetInt32("LoggedIn")) 
+    {
+        <div>
+            <a href="/edit/@Model.WeddingId" class="btn btn-warning">Edit</a>
+            <a href="/delete/@Model.WeddingId">Delete</a>
+        </div>
+    }
+
+}
+
+
+
+
+
+
+
+<div>
+    <a href="/logout" class="btn btn-danger">Logout</a>
+</div>

@@ -1,0 +1,36 @@
+@model Wedding
+
+<h1>Plan your Wedding</h1>
+
+<div>
+    <a href="/dashboard" class="btn btn-info">Dashboard</a>
+</div>
+<div>
+    <form action="/planWedding" method="post">
+        <div>
+            <label> Wedder One</label>
+            <input asp-for="person1">
+            <span asp-validation-for="person1" class="text-danger"></span>
+        </div>
+        <div>
+            <label> Wedder Two</label>
+            <input asp-for="person2">
+            <span asp-validation-for="person2" class="text-danger"></span>
+        </div>
+        <div>
+            <label> Date</label>
+            <input asp-for="dateofWedding">
+            <span asp-validation-for="dateofWedding" class="text-danger"></span>
+        </div>
+        <div>
+            <label> Address</label>
+            <input asp-for="Address">
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+        <input type="hidden" name="UserId" value="@ViewBag.UserId">
+        <input type="submit" value="Create" class="btn btn-success">
+    </form>
+</div>
+<div>
+    <a href="/logout" class="btn btn-danger">Logout</a>
+</div>
